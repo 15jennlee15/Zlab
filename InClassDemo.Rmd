@@ -3,6 +3,8 @@ title: "InClassDemo"
 output: html_document
 ---
 
+###Jackie was here.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
