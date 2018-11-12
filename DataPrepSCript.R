@@ -47,4 +47,3 @@ ggplot(tidy_data_new, aes(x=ders_c, y=ext)) +
   geom_smooth(method = "lm") +
   labs(x="Maternal Emotion Dysregulation (DERS)",
        y="Child Externalizing Behaviors")
-
