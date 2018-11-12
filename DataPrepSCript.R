@@ -20,3 +20,14 @@ tidy_data <- data %>%
 
 #view tidy data
 glimpse(tidy_data)
+
+#Center DERS and Reactivity variables
+center_scale <- function(x) {
+  scale(x, scale = FALSE)
+}
+
+#Create Reactivity Variable
+tidy_data_new <- tidy_data %>% 
+  mutate(reactivity = child_lego - child_baseline, ders_c = center_scale(ders), reactivity_c = center_scale(reactivity), ders_x_reactivity = ders_c * reactivity_c)
+
+glimpse(tidy_data_new)
