@@ -31,3 +31,20 @@ tidy_data_new <- tidy_data %>%
   mutate(reactivity = child_lego - child_baseline, ders_c = center_scale(ders), reactivity_c = center_scale(reactivity), ders_x_reactivity = ders_c * reactivity_c)
 
 glimpse(tidy_data_new)
+
+#A scatterplot of maternal emotion dysregulation (x-axis)
+#and child internalizing behaviors (y-axis), including a regression line 
+ggplot(tidy_data_new, aes(x=ders_c, y=int)) +
+  geom_point(color="black") +
+  geom_smooth(method = "lm") +
+   labs(x="Maternal Emotion Dysregulation (DERS)",
+       y="Child Internalizing Behaviors")
+
+#A scatterplot of maternal emotion dysregulation (x-axis)
+#and child externalizing behaviors (y-axis), including a regression line
+ggplot(tidy_data_new, aes(x=ders_c, y=ext)) +
+  geom_point(color="black") +
+  geom_smooth(method = "lm") +
+  labs(x="Maternal Emotion Dysregulation (DERS)",
+       y="Child Externalizing Behaviors")
+
