@@ -108,10 +108,7 @@ tidy_data <- tidy_data %>%
   mutate(reactivity = child_lego - child_baseline, 
          ders_c = center_scale(ders), 
          reactivity_c = center_scale(reactivity), 
-         ders_x_reactivity = ders_c * reactivity_c, 
-         ders_group = case_when(
-    ders_c >= 0 ~ "high", 
-    ders_c < 0 ~ "low"))
+         ders_x_reactivity = ders_c * reactivity_c)
 
 glimpse(tidy_data)
 ```
@@ -132,10 +129,6 @@ str(tidy_data)
 table <- tidy_data %>%
   summarize(DERS_mean = mean(ders, na.rm = TRUE), 
             DERS_SD = sd(ders, na.rm = TRUE), 
-            Interalizing_mean = mean(int, na.rm = TRUE), 
-            Internalizing_SD = sd(int, na.rm = TRUE), 
-            Externalizing_mean = mean(ext, na.rm = TRUE), 
-            Externalizing_SD = sd(ext, na.rm = TRUE), 
             Reactivity_mean = mean(reactivity, na.rm = TRUE), 
             Reactivity_SD = sd(reactivity, na.rm = TRUE))
 
@@ -145,13 +138,10 @@ kable(table,
 
 #Additional Table
 table2 <- tidy_data %>%
-  group_by(ders_group) %>%
-  summarize(Interalizing_mean = mean(int, na.rm = TRUE), 
-            Internalizing_SD = sd(int, na.rm = TRUE), 
-            Externalizing_mean = mean(ext, na.rm = TRUE), 
-            Externalizing_SD = sd(ext, na.rm = TRUE), 
-            Reactivity_mean = mean(reactivity, na.rm = TRUE), 
-            Reactivity_SD = sd(reactivity, na.rm = TRUE))
+  group_by(cbcl_subtype) %>%
+  summarize(cbcl_mean= mean(cbcl_score, na.rm = TRUE), 
+            cbcl_SD = sd(cbcl_score, na.rm = TRUE))
+  
 
 kable(table2, 
       format = "latex",

@@ -1,0 +1,7 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{DataPrepScript_apa_style_files/figure-latex/descriptives-1.pdf}
+\caption{}
+\end{figure*}

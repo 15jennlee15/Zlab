@@ -1,0 +1,259 @@
+\documentclass[man]{apa6}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Maternal Emotion Dysregulation and its Association with Child Internalizing and Externalizing Behaviors and Heart Rate Variability},
+            pdfauthor={Jackie O'Brien, Jenn Lewis, \& Yoel Everett},
+            pdfkeywords={emotion regulation, parenting, child outcomes},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+
+  \title{Maternal Emotion Dysregulation and its Association with Child
+Internalizing and Externalizing Behaviors and Heart Rate Variability}
+    \author{Jackie O'Brien\textsuperscript{1}, Jenn Lewis\textsuperscript{1}, \&
+Yoel Everett\textsuperscript{1}}
+    \date{}
+  
+\shorttitle{Maternal Emotion Dysregulation and Child Outcomes}
+\affiliation{
+\vspace{0.5cm}
+\textsuperscript{1} University of Oregon}
+\keywords{emotion regulation, parenting, child outcomes\newline\indent Word count: X}
+\usepackage{csquotes}
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[flushleft]{threeparttable}
+\usepackage{threeparttablex}
+
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+\usepackage{lineno}
+
+\linenumbers
+
+\authornote{
+
+Correspondence concerning this article should be addressed to Jackie
+O'Brien, Postal address. E-mail:
+\href{mailto:my@email.com}{\nolinkurl{my@email.com}}}
+
+\abstract{
+One or two sentences providing a \textbf{basic introduction} to the
+field, comprehensible to a scientist in any discipline.
+
+Two to three sentences of \textbf{more detailed background},
+comprehensible to scientists in related disciplines.
+
+One sentence clearly stating the \textbf{general problem} being
+addressed by this particular study.
+
+One sentence summarizing the main result (with the words ``\textbf{here
+we show}'' or their equivalent).
+
+Two or three sentences explaining what the \textbf{main result} reveals
+in direct comparison to what was thought to be the case previously, or
+how the main result adds to previous knowledge.
+
+One or two sentences to put the results into a more \textbf{general
+context}.
+
+Two or three sentences to provide a \textbf{broader perspective},
+readily comprehensible to a scientist in any discipline.
+
+
+}
+
+\begin{document}
+\maketitle
+
+\begin{verbatim}
+## Observations: 97
+## Variables: 6
+## $ family_id      <dbl> 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008,...
+## $ cbcl_int       <dbl> 10, 4, 15, 9, 10, 10, 5, 4, 3, 6, 3, 10, 13, 5,...
+## $ cbcl_ext       <dbl> 13, 12, 20, 14, 18, 16, 7, 12, 3, 6, 0, 7, 17, ...
+## $ ders           <dbl> 54, 59, 87, 75, 48, 65, 55, 53, 54, 48, 40, 68,...
+## $ child_baseline <dbl> 7.038787, 5.819146, NA, 5.684124, NA, NA, 6.111...
+## $ child_lego     <dbl> 5.952458, 5.132448, 6.669899, 4.372479, 5.04177...
+\end{verbatim}
+
+\begin{verbatim}
+## Observations: 136
+## Variables: 6
+## $ family_id      <dbl> 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008,...
+## $ ders           <dbl> 54, 59, 87, 75, 48, 65, 55, 53, 54, 48, 40, 68,...
+## $ child_baseline <dbl> 7.038787, 5.819146, NA, 5.684124, NA, NA, 6.111...
+## $ child_lego     <dbl> 5.952458, 5.132448, 6.669899, 4.372479, 5.04177...
+## $ cbcl_subtype   <chr> "int", "int", "int", "int", "int", "int", "int"...
+## $ cbcl_score     <dbl> 10, 4, 15, 9, 10, 10, 5, 4, 3, 6, 3, 10, 13, 5,...
+\end{verbatim}
+
+\begin{verbatim}
+## Observations: 136
+## Variables: 10
+## $ family_id         <dbl> 1001, 1002, 1003, 1004, 1005, 1006, 1007, 10...
+## $ ders              <dbl> 54, 59, 87, 75, 48, 65, 55, 53, 54, 48, 40, ...
+## $ child_baseline    <dbl> 7.038787, 5.819146, NA, 5.684124, NA, NA, 6....
+## $ child_lego        <dbl> 5.952458, 5.132448, 6.669899, 4.372479, 5.04...
+## $ cbcl_subtype      <chr> "int", "int", "int", "int", "int", "int", "i...
+## $ cbcl_score        <dbl> 10, 4, 15, 9, 10, 10, 5, 4, 3, 6, 3, 10, 13,...
+## $ reactivity        <dbl> -1.086328857, -0.686697786, NA, -1.311645429...
+## $ ders_c            <dbl> -16.102941, -11.102941, 16.897059, 4.897059,...
+## $ reactivity_c      <dbl> 0.014032141, 0.413663212, NA, -0.211284431, ...
+## $ ders_x_reactivity <dbl> -0.22595873, -4.59287831, NA, -1.03467229, N...
+\end{verbatim}
+
+\section{Results}\label{results}
+
+\begin{verbatim}
+## Warning: Removed 4 rows containing non-finite values (stat_smooth).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 4 rows containing missing values (geom_point).
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{DataPrepScript_apa_style_files/figure-latex/descriptives-1.pdf}
+\caption{}
+\end{figure}
+
+\begin{verbatim}
+## 'data.frame':    136 obs. of  10 variables:
+##  $ family_id        : num  1001 1002 1003 1004 1005 ...
+##  $ ders             : num  54 59 87 75 48 65 55 53 54 48 ...
+##  $ child_baseline   : num  7.04 5.82 NA 5.68 NA ...
+##  $ child_lego       : num  5.95 5.13 6.67 4.37 5.04 ...
+##  $ cbcl_subtype     : chr  "int" "int" "int" "int" ...
+##  $ cbcl_score       : num  10 4 15 9 10 10 5 4 3 6 ...
+##  $ reactivity       : num  -1.086 -0.687 NA -1.312 NA ...
+##  $ ders_c           : num  -16.1 -11.1 16.9 4.9 -22.1 ...
+##  $ reactivity_c     : num  0.014 0.414 NA -0.211 NA ...
+##  $ ders_x_reactivity: num  -0.226 -4.593 NA -1.035 NA ...
+\end{verbatim}
+
+\begin{tabular}{rrrr}
+\toprule
+DERS\_mean & DERS\_SD & Reactivity\_mean & Reactivity\_SD\\
+\midrule
+70.10294 & 22.33027 & -1.100361 & 0.6520285\\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{lrr}
+\toprule
+cbcl\_subtype & cbcl\_mean & cbcl\_SD\\
+\midrule
+ext & 16.28333 & 9.492662\\
+int & 11.17318 & 7.539277\\
+\bottomrule
+\end{tabular}
+
+\section{Methods}\label{methods}
+
+We report how we determined our sample size, all data exclusions (if
+any), all manipulations, and all measures in the study.
+
+\subsection{Participants}\label{participants}
+
+\subsection{Material}\label{material}
+
+\subsection{Procedure}\label{procedure}
+
+\subsection{Data analysis}\label{data-analysis}
+
+We used R (Version 3.5.1; R Core Team, 2018) for all our analyses.
+
+\section{Discussion}\label{discussion}
+
+\newpage
+
+\section{References}\label{references}
+
+\begingroup
+\setlength{\parindent}{-0.5in} \setlength{\leftskip}{0.5in}
+
+\hypertarget{refs}{}
+\hypertarget{ref-R-base}{}
+R Core Team. (2018). \emph{R: A language and environment for statistical
+computing}. Vienna, Austria: R Foundation for Statistical Computing.
+Retrieved from \url{https://www.R-project.org/}
+
+\endgroup
+
+
+\end{document}
