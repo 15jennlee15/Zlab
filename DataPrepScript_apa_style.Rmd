@@ -95,12 +95,12 @@ center_scale <- function(x) {
 }
 
 #Create Reactivity Variable
-tidy_data_new <- tidy_data %>% 
+tidy_data <- tidy_data %>% 
   mutate(reactivity = child_lego - child_baseline, ders_c = center_scale(ders), reactivity_c = center_scale(reactivity), ders_x_reactivity = ders_c * reactivity_c, ders_group = case_when(
     ders_c >= 0 ~ "high", 
     ders_c < 0 ~ "low"))
 
-glimpse(tidy_data_new)
+glimpse(tidy_data)
 ```
 
 # Results
@@ -108,7 +108,7 @@ glimpse(tidy_data_new)
 ```{r descriptives}
 #A scatterplot of maternal emotion dysregulation (x-axis)
 #and child internalizing behaviors (y-axis), including a regression line 
-ggplot(tidy_data_new, aes(x=ders_c, y=int)) +
+ggplot(tidy_data, aes(x=ders_c, y=int)) +
   geom_point(color="black") +
   geom_smooth(method = "lm") +
    labs(x="Maternal Emotion Dysregulation (DERS)",
@@ -122,9 +122,9 @@ ggplot(tidy_data_new, aes(x=ders_c, y=ext)) +
   labs(x="Maternal Emotion Dysregulation (DERS)",
        y="Child Externalizing Behaviors")
 
-str(tidy_data_new)
+str(tidy_data)
 #Descriptives Table
-table <- tidy_data_new %>%
+table <- tidy_data %>%
   summarize(DERS_mean = mean(ders, na.rm = TRUE), 
             DERS_SD = sd(ders, na.rm = TRUE), 
             Interalizing_mean = mean(int, na.rm = TRUE), 
@@ -139,7 +139,7 @@ kable(table,
       booktabs = TRUE)
 
 #Additional Table
-table2 <- tidy_data_new %>%
+table2 <- tidy_data %>%
   group_by(ders_group) %>%
   summarize(Interalizing_mean = mean(int, na.rm = TRUE), 
             Internalizing_SD = sd(int, na.rm = TRUE), 
