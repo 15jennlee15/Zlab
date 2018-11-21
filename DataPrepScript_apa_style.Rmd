@@ -86,6 +86,15 @@ tidy_data <- data %>%
   spread(type, val) %>%
   select(-text)
 
+tidy_data <- data %>%
+  filter(!is.na(family_id)) %>%
+  gather(key = var, value = cbcl_score, starts_with("cbcl")) %>% 
+  separate(var, 
+           c("discard", "cbcl_subtype"), 
+           sep = "_",
+           convert = TRUE) %>%
+  select(-discard) 
+
 #view tidy data
 glimpse(tidy_data)
 
@@ -96,7 +105,11 @@ center_scale <- function(x) {
 
 #Create Reactivity Variable
 tidy_data <- tidy_data %>% 
-  mutate(reactivity = child_lego - child_baseline, ders_c = center_scale(ders), reactivity_c = center_scale(reactivity), ders_x_reactivity = ders_c * reactivity_c, ders_group = case_when(
+  mutate(reactivity = child_lego - child_baseline, 
+         ders_c = center_scale(ders), 
+         reactivity_c = center_scale(reactivity), 
+         ders_x_reactivity = ders_c * reactivity_c, 
+         ders_group = case_when(
     ders_c >= 0 ~ "high", 
     ders_c < 0 ~ "low"))
 
@@ -108,19 +121,11 @@ glimpse(tidy_data)
 ```{r descriptives}
 #A scatterplot of maternal emotion dysregulation (x-axis)
 #and child internalizing behaviors (y-axis), including a regression line 
-ggplot(tidy_data, aes(x=ders_c, y=int)) +
+ggplot(tidy_data, aes(x=ders, y=cbcl_score, color = cbcl_subtype)) +
   geom_point(color="black") +
   geom_smooth(method = "lm") +
    labs(x="Maternal Emotion Dysregulation (DERS)",
-       y="Child Internalizing Behaviors")
-
-#A scatterplot of maternal emotion dysregulation (x-axis)
-#and child externalizing behaviors (y-axis), including a regression line
-ggplot(tidy_data_new, aes(x=ders_c, y=ext)) +
-  geom_point(color="black") +
-  geom_smooth(method = "lm") +
-  labs(x="Maternal Emotion Dysregulation (DERS)",
-       y="Child Externalizing Behaviors")
+       y="Child Problem Behaviors")
 
 str(tidy_data)
 #Descriptives Table
