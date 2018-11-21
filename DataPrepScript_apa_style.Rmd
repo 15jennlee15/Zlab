@@ -1,0 +1,187 @@
+---
+title             : "Maternal Emotion Dysregulation and its Association with Child Internalizing and     Externalizing Behaviors and Heart Rate Variability"
+shorttitle        : "Maternal Emotion Dysregulation and Child Outcomes"
+
+author: 
+  - name          : "Jackie O'Brien"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Postal address"
+    email         : "my@email.com"
+  - name          : "Jenn Lewis"
+    affiliation   : "1"
+  - name          : "Yoel Everett"
+    affiliation   : "1"
+
+affiliation:
+  - id            : "1"
+    institution   : "University of Oregon"
+
+authornote: 
+  
+
+
+
+abstract: |
+  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
+  
+  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
+  
+  One sentence clearly stating the **general problem** being addressed by  this particular study.
+  
+  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
+  
+  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
+  
+  One or two sentences to put the results into a more **general context**.
+  
+  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "emotion regulation, parenting, child outcomes"
+wordcount         : "X"
+
+bibliography      : ["r-references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : yes
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r loading packages/data import}
+library("papaja")
+
+#You will need to install kableExtra package in order for this to run
+
+#Load Packages
+library(tidyverse)
+library(rio)
+library(here)
+library(kableExtra)
+
+#import data and clean names
+data <- import(here("data", "R Project Data copy.xlsx")) %>%
+  janitor::clean_names()
+
+#view data
+glimpse(data)
+
+```
+
+```{r tidy data}
+#tidy data using required functions
+tidy_data <- data %>%
+  filter(!is.na(family_id)) %>%
+  gather(text, val, 2:3) %>%
+  separate(text, c("text", "type"), sep= "_") %>%
+  spread(type, val) %>%
+  select(-text)
+
+#view tidy data
+glimpse(tidy_data)
+
+#Center DERS and Reactivity variables
+center_scale <- function(x) {
+  as.numeric(scale(x, scale = FALSE))
+}
+
+#Create Reactivity Variable
+tidy_data_new <- tidy_data %>% 
+  mutate(reactivity = child_lego - child_baseline, ders_c = center_scale(ders), reactivity_c = center_scale(reactivity), ders_x_reactivity = ders_c * reactivity_c, ders_group = case_when(
+    ders_c >= 0 ~ "high", 
+    ders_c < 0 ~ "low"))
+
+glimpse(tidy_data_new)
+```
+
+# Results
+
+```{r descriptives}
+#A scatterplot of maternal emotion dysregulation (x-axis)
+#and child internalizing behaviors (y-axis), including a regression line 
+ggplot(tidy_data_new, aes(x=ders_c, y=int)) +
+  geom_point(color="black") +
+  geom_smooth(method = "lm") +
+   labs(x="Maternal Emotion Dysregulation (DERS)",
+       y="Child Internalizing Behaviors")
+
+#A scatterplot of maternal emotion dysregulation (x-axis)
+#and child externalizing behaviors (y-axis), including a regression line
+ggplot(tidy_data_new, aes(x=ders_c, y=ext)) +
+  geom_point(color="black") +
+  geom_smooth(method = "lm") +
+  labs(x="Maternal Emotion Dysregulation (DERS)",
+       y="Child Externalizing Behaviors")
+
+str(tidy_data_new)
+#Descriptives Table
+table <- tidy_data_new %>%
+  summarize(DERS_mean = mean(ders, na.rm = TRUE), 
+            DERS_SD = sd(ders, na.rm = TRUE), 
+            Interalizing_mean = mean(int, na.rm = TRUE), 
+            Internalizing_SD = sd(int, na.rm = TRUE), 
+            Externalizing_mean = mean(ext, na.rm = TRUE), 
+            Externalizing_SD = sd(ext, na.rm = TRUE), 
+            Reactivity_mean = mean(reactivity, na.rm = TRUE), 
+            Reactivity_SD = sd(reactivity, na.rm = TRUE))
+
+kable(table, 
+      format = "latex",
+      booktabs = TRUE)
+
+#Additional Table
+table2 <- tidy_data_new %>%
+  group_by(ders_group) %>%
+  summarize(Interalizing_mean = mean(int, na.rm = TRUE), 
+            Internalizing_SD = sd(int, na.rm = TRUE), 
+            Externalizing_mean = mean(ext, na.rm = TRUE), 
+            Externalizing_SD = sd(ext, na.rm = TRUE), 
+            Reactivity_mean = mean(reactivity, na.rm = TRUE), 
+            Reactivity_SD = sd(reactivity, na.rm = TRUE))
+
+kable(table2, 
+      format = "latex",
+      booktabs = TRUE)
+```
+
+
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+
+
+# Discussion
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "r-references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
