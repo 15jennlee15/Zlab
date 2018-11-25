@@ -107,8 +107,7 @@ center_scale <- function(x) {
 tidy_data <- tidy_data %>% 
   mutate(reactivity = child_lego - child_baseline, 
          ders_c = center_scale(ders), 
-         reactivity_c = center_scale(reactivity), 
-         ders_x_reactivity = ders_c * reactivity_c)
+         reactivity_c = center_scale(reactivity))
 
 glimpse(tidy_data)
 ```
@@ -156,11 +155,13 @@ kable(table2,
 ```
 
 ```{r inference statistics}
-linear_model1 <- lm()
+linear_model1 <- lm(cbcl_score ~ ders_c * reactivity_c, 
+                    data = subset(tidy_data, cbcl_subtype == "int"))
+summary(linear_model1)
 
-linear_model2 <- lm()
-
-linear_model3 <- lm()
+linear_model2 <- lm(cbcl_score ~ ders_c * reactivity_c, 
+                    data = subset(tidy_data, cbcl_subtype == "ext"))
+summary(linear_model2)
 
 ```
 

@@ -163,47 +163,60 @@ readily comprehensible to a scientist in any discipline.
 
 \begin{verbatim}
 ## Observations: 136
-## Variables: 10
-## $ family_id         <dbl> 1001, 1002, 1003, 1004, 1005, 1006, 1007, 10...
-## $ ders              <dbl> 54, 59, 87, 75, 48, 65, 55, 53, 54, 48, 40, ...
-## $ child_baseline    <dbl> 7.038787, 5.819146, NA, 5.684124, NA, NA, 6....
-## $ child_lego        <dbl> 5.952458, 5.132448, 6.669899, 4.372479, 5.04...
-## $ cbcl_subtype      <chr> "int", "int", "int", "int", "int", "int", "i...
-## $ cbcl_score        <dbl> 10, 4, 15, 9, 10, 10, 5, 4, 3, 6, 3, 10, 13,...
-## $ reactivity        <dbl> -1.086328857, -0.686697786, NA, -1.311645429...
-## $ ders_c            <dbl> -16.102941, -11.102941, 16.897059, 4.897059,...
-## $ reactivity_c      <dbl> 0.014032141, 0.413663212, NA, -0.211284431, ...
-## $ ders_x_reactivity <dbl> -0.22595873, -4.59287831, NA, -1.03467229, N...
+## Variables: 9
+## $ family_id      <dbl> 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008,...
+## $ ders           <dbl> 54, 59, 87, 75, 48, 65, 55, 53, 54, 48, 40, 68,...
+## $ child_baseline <dbl> 7.038787, 5.819146, NA, 5.684124, NA, NA, 6.111...
+## $ child_lego     <dbl> 5.952458, 5.132448, 6.669899, 4.372479, 5.04177...
+## $ cbcl_subtype   <chr> "int", "int", "int", "int", "int", "int", "int"...
+## $ cbcl_score     <dbl> 10, 4, 15, 9, 10, 10, 5, 4, 3, 6, 3, 10, 13, 5,...
+## $ reactivity     <dbl> -1.086328857, -0.686697786, NA, -1.311645429, N...
+## $ ders_c         <dbl> -16.102941, -11.102941, 16.897059, 4.897059, -2...
+## $ reactivity_c   <dbl> 0.014032141, 0.413663212, NA, -0.211284431, NA,...
 \end{verbatim}
+
+\section{Introduction}\label{introduction}
+
+\section{Methods}\label{methods}
+
+We report how we determined our sample size, all data exclusions (if
+any), all manipulations, and all measures in the study.
+
+\subsection{Participants}\label{participants}
+
+\subsection{Material}\label{material}
+
+\subsection{Procedure}\label{procedure}
+
+\subsection{Data analysis}\label{data-analysis}
+
+We used R (Version 3.5.1; R Core Team, 2018) and the R-packages
+\emph{bindrcpp} (Version 0.2.2; Müller, 2018), \emph{dplyr} (Version
+0.7.7; Wickham, François, Henry, \& Müller, 2018), \emph{forcats}
+(Version 0.3.0; Wickham, 2018a), \emph{ggplot2} (Version 3.0.0; Wickham,
+2016), \emph{here} (Version 0.1; Müller, 2017), \emph{kableExtra}
+(Version 0.9.0; Zhu, 2018), \emph{papaja} (Version 0.1.0.9842; Aust \&
+Barth, 2018), \emph{purrr} (Version 0.2.5; Henry \& Wickham, 2018),
+\emph{readr} (Version 1.1.1; Wickham, Hester, \& Francois, 2017),
+\emph{rio} (Version 0.5.10; C.-h. Chan, Chan, Leeper, \& Becker, 2018),
+\emph{stringr} (Version 1.3.1; Wickham, 2018b), \emph{tibble} (Version
+1.4.2; Müller \& Wickham, 2018), \emph{tidyr} (Version 0.8.1; Wickham \&
+Henry, 2018), and \emph{tidyverse} (Version 1.2.1; Wickham, 2017) for
+all our analyses.
 
 \section{Results}\label{results}
 
 \begin{verbatim}
-## Warning: Removed 4 rows containing non-finite values (stat_smooth).
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Removed 4 rows containing missing values (geom_point).
-\end{verbatim}
-
-\begin{figure}
-\centering
-\includegraphics{DataPrepScript_apa_style_files/figure-latex/descriptives-1.pdf}
-\caption{}
-\end{figure}
-
-\begin{verbatim}
-## 'data.frame':    136 obs. of  10 variables:
-##  $ family_id        : num  1001 1002 1003 1004 1005 ...
-##  $ ders             : num  54 59 87 75 48 65 55 53 54 48 ...
-##  $ child_baseline   : num  7.04 5.82 NA 5.68 NA ...
-##  $ child_lego       : num  5.95 5.13 6.67 4.37 5.04 ...
-##  $ cbcl_subtype     : chr  "int" "int" "int" "int" ...
-##  $ cbcl_score       : num  10 4 15 9 10 10 5 4 3 6 ...
-##  $ reactivity       : num  -1.086 -0.687 NA -1.312 NA ...
-##  $ ders_c           : num  -16.1 -11.1 16.9 4.9 -22.1 ...
-##  $ reactivity_c     : num  0.014 0.414 NA -0.211 NA ...
-##  $ ders_x_reactivity: num  -0.226 -4.593 NA -1.035 NA ...
+## 'data.frame':    136 obs. of  9 variables:
+##  $ family_id     : num  1001 1002 1003 1004 1005 ...
+##  $ ders          : num  54 59 87 75 48 65 55 53 54 48 ...
+##  $ child_baseline: num  7.04 5.82 NA 5.68 NA ...
+##  $ child_lego    : num  5.95 5.13 6.67 4.37 5.04 ...
+##  $ cbcl_subtype  : chr  "int" "int" "int" "int" ...
+##  $ cbcl_score    : num  10 4 15 9 10 10 5 4 3 6 ...
+##  $ reactivity    : num  -1.086 -0.687 NA -1.312 NA ...
+##  $ ders_c        : num  -16.1 -11.1 16.9 4.9 -22.1 ...
+##  $ reactivity_c  : num  0.014 0.414 NA -0.211 NA ...
 \end{verbatim}
 
 \begin{tabular}{rrrr}
@@ -223,32 +236,83 @@ int & 11.17318 & 7.539277\\
 \bottomrule
 \end{tabular}
 
-\section{Methods}\label{methods}
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = cbcl_score ~ ders_c * reactivity_c, data = subset(tidy_data, 
+##     cbcl_subtype == "int"))
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.871 -4.287 -1.288  2.292 17.350 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         11.00475    0.97629  11.272 1.07e-14 ***
+## ders_c               0.16504    0.04142   3.985 0.000245 ***
+## reactivity_c        -1.19234    1.54053  -0.774 0.442990    
+## ders_c:reactivity_c -0.18142    0.07985  -2.272 0.027927 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.814 on 45 degrees of freedom
+##   (19 observations deleted due to missingness)
+## Multiple R-squared:  0.3413, Adjusted R-squared:  0.2974 
+## F-statistic: 7.772 on 3 and 45 DF,  p-value: 0.0002752
+\end{verbatim}
 
-We report how we determined our sample size, all data exclusions (if
-any), all manipulations, and all measures in the study.
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = cbcl_score ~ ders_c * reactivity_c, data = subset(tidy_data, 
+##     cbcl_subtype == "ext"))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -11.938  -6.341  -2.041   3.818  27.750 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         16.01973    1.32811  12.062 1.07e-15 ***
+## ders_c               0.16025    0.05634   2.844  0.00668 ** 
+## reactivity_c         1.72370    2.09567   0.823  0.41513    
+## ders_c:reactivity_c -0.03287    0.10863  -0.303  0.76360    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 9.27 on 45 degrees of freedom
+##   (19 observations deleted due to missingness)
+## Multiple R-squared:  0.1698, Adjusted R-squared:  0.1144 
+## F-statistic: 3.068 on 3 and 45 DF,  p-value: 0.03733
+\end{verbatim}
 
-\subsection{Participants}\label{participants}
+\begin{verbatim}
+## Warning: Removed 4 rows containing non-finite values (stat_smooth).
+\end{verbatim}
 
-\subsection{Material}\label{material}
+\begin{verbatim}
+## Warning: Removed 4 rows containing missing values (geom_point).
+\end{verbatim}
 
-\subsection{Procedure}\label{procedure}
+\begin{figure}
+\centering
+\includegraphics{DataPrepScript_apa_style_files/figure-latex/plots-1.pdf}
+\caption{}
+\end{figure}
 
-\subsection{Data analysis}\label{data-analysis}
+\begin{verbatim}
+## Warning: Removed 36 rows containing non-finite values (stat_smooth).
+\end{verbatim}
 
-We used R (Version 3.5.1; R Core Team, 2018) and the R-packages
-\emph{bindrcpp} (Version 0.2.2; Müller, 2018), \emph{dplyr} (Version
-0.7.6; Wickham, François, Henry, \& Müller, 2018), \emph{forcats}
-(Version 0.3.0; Wickham, 2018a), \emph{ggplot2} (Version 3.0.0; Wickham,
-2016), \emph{here} (Version 0.1; Müller, 2017), \emph{kableExtra}
-(Version 0.9.0; Zhu, 2018), \emph{papaja} (Version 0.1.0.9842; Aust \&
-Barth, 2018), \emph{purrr} (Version 0.2.5; Henry \& Wickham, 2018),
-\emph{readr} (Version 1.1.1; Wickham, Hester, \& Francois, 2017),
-\emph{rio} (Version 0.5.10; C.-h. Chan, Chan, Leeper, \& Becker, 2018),
-\emph{stringr} (Version 1.3.1; Wickham, 2018b), \emph{tibble} (Version
-1.4.2; Müller \& Wickham, 2018), \emph{tidyr} (Version 0.8.1; Wickham \&
-Henry, 2018), and \emph{tidyverse} (Version 1.2.1; Wickham, 2017) for
-all our analyses.
+\begin{verbatim}
+## Warning: Removed 36 rows containing missing values (geom_point).
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{DataPrepScript_apa_style_files/figure-latex/plots-2.pdf}
+\caption{}
+\end{figure}
 
 \section{Discussion}\label{discussion}
 

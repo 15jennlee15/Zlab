@@ -2,6 +2,13 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{DataPrepScript_apa_style_files/figure-latex/descriptives-1.pdf}
+\includegraphics{DataPrepScript_apa_style_files/figure-latex/plots-1.pdf}
+\caption{}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{DataPrepScript_apa_style_files/figure-latex/plots-2.pdf}
 \caption{}
 \end{figure*}
