@@ -158,6 +158,10 @@ kable(table2,
 ```{r inference statistics}
 linear_model1 <- lm()
 
+linear_model2 <- lm()
+
+linear_model3 <- lm()
+
 ```
 
 ```{r plots}
