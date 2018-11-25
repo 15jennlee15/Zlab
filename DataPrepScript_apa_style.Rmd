@@ -61,12 +61,14 @@ output            : papaja::apa6_pdf
 library("papaja")
 
 #You will need to install kableExtra package in order for this to run
+#You will need to install jtools package in order for this to run
 
 #Load Packages
 library(tidyverse)
 library(rio)
 library(here)
 library(kableExtra)
+library(jtools)
 
 #import data and clean names
 data <- import(here("data", "R Project Data copy.xlsx")) %>%
@@ -183,6 +185,13 @@ ggplot(tidy_data, aes(x=ders, y=reactivity)) +
    labs(title= "Figure 2. Maternal Emotion Dysregulation and Child HRV Reactivity",
         x="Maternal Emotion Dysregulation (DERS)",
        y="Child Reactivity HRV")
+
+interaction_plot <- interact_plot(linear_model1, pred = "reactivity_c", modx = "ders_c", centered = "none", 
+      main.title= "Figure 3. Interaction of Child Reactivity and Maternal Emotion Dysregulation Predicting Child Behavior Problems",
+      x.label="Child Reactivity HRV",
+      y.label="Child Behavior Problems (CBCL)",
+      legend.main = "Maternal Emotion Dysregulation (DERS)")
+interaction_plot
 ```
 
 
