@@ -113,17 +113,23 @@ tidy_data <- tidy_data %>%
 glimpse(tidy_data)
 ```
 
+#Introduction
+
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
 # Results
 
 ```{r descriptives}
-#A scatterplot of maternal emotion dysregulation (x-axis)
-#and child internalizing behaviors (y-axis), including a regression line 
-ggplot(tidy_data, aes(x=ders, y=cbcl_score, color = cbcl_subtype)) +
-  geom_point(color="black") +
-  geom_smooth(method = "lm") +
-   labs(x="Maternal Emotion Dysregulation (DERS)",
-       y="Child Problem Behaviors")
-
 str(tidy_data)
 #Descriptives Table
 table <- tidy_data %>%
@@ -146,21 +152,33 @@ table2 <- tidy_data %>%
 kable(table2, 
       format = "latex",
       booktabs = TRUE)
+
 ```
 
+```{r inference statistics}
+linear_model1 <- lm()
 
-# Methods
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+```
 
-## Participants
+```{r plots}
+#A scatterplot of maternal emotion dysregulation (x-axis)
+#and child behaviors (y-axis), including a regression line 
+ggplot(tidy_data, aes(x=ders, y=cbcl_score, color = cbcl_subtype)) +
+  geom_point(color="black") +
+  geom_smooth(method = "lm") +
+   labs(title= "Figure 1. Maternal Emotion Dysregulation and Child Behaviors", 
+        x="Maternal Emotion Dysregulation (DERS)",
+       y="Child Problem Behaviors")
 
-## Material
-
-## Procedure
-
-## Data analysis
-We used `r cite_r("r-references.bib")` for all our analyses.
-
+#A scatterplot of maternal emotion dysregulation (x-axis)
+#and reactivity (y-axis), including a regression line 
+ggplot(tidy_data, aes(x=ders, y=reactivity)) +
+  geom_point(color="black") +
+  geom_smooth(method = "lm") +
+   labs(title= "Figure 2. Maternal Emotion Dysregulation and Child HRV Reactivity",
+        x="Maternal Emotion Dysregulation (DERS)",
+       y="Child Reactivity HRV")
+```
 
 
 
