@@ -190,7 +190,7 @@ interaction_plot <- interact_plot(linear_model1, pred = "reactivity_c", modx = "
       main.title= "Figure 3. Interaction of Child Reactivity and Maternal Emotion Dysregulation Predicting Child Behavior Problems",
       x.label="Child Reactivity HRV",
       y.label="Child Behavior Problems (CBCL)",
-      legend.main = "Maternal Emotion Dysregulation (DERS)")
+      legend.main = "DERS")
 interaction_plot
 ```
 
