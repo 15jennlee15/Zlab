@@ -133,7 +133,8 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 # Results
 
 ```{r descriptives}
-str(tidy_data)
+#str(tidy_data)
+
 #Descriptives Table
 table <- tidy_data %>%
   summarize(DERS_mean = mean(ders, na.rm = TRUE), 
@@ -143,7 +144,8 @@ table <- tidy_data %>%
 
 kable(table, 
       format = "latex",
-      booktabs = TRUE)
+      booktabs = TRUE,
+      caption = "Means and SDs of maternal emotion dysregulation (DERS) and child reactivity")
 
 #Additional Table
 table2 <- tidy_data %>%
@@ -154,7 +156,8 @@ table2 <- tidy_data %>%
 
 kable(table2, 
       format = "latex",
-      booktabs = TRUE)
+      booktabs = TRUE,
+      caption = "Means and SDs of child internalizing and externalizing behavior")
 
 ```
 
