@@ -69,6 +69,7 @@ library(rio)
 library(here)
 library(kableExtra)
 library(jtools)
+library(knitr)
 
 knitr::opts_chunk$set()
 ```
