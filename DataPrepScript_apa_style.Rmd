@@ -58,19 +58,19 @@ output            : papaja::apa6_pdf
 ---
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
-library("papaja")
-
 #You will need to install kableExtra package in order for this to run
 #You will need to install jtools package in order for this to run
+#You will need to install sjPlot package in order for this to run
 
 #Load Packages
+library("papaja")
 library(tidyverse)
 library(rio)
 library(here)
 library(kableExtra)
 library(jtools)
 library(knitr)
-
+library(sjPlot)
 knitr::opts_chunk$set()
 ```
 
@@ -134,7 +134,7 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 # Results
 
 ```{r descriptives}
-#str(tidy_data)
+str(tidy_data)
 
 #Descriptives Table
 table <- tidy_data %>%
@@ -165,12 +165,30 @@ kable(table2,
 ```{r inference statistics}
 linear_model1 <- lm(cbcl_score ~ ders_c * reactivity_c, 
                     data = subset(tidy_data, cbcl_subtype == "int"))
-summary(linear_model1)
+#summary(linear_model1)
+
+tab_model(
+  linear_model1,
+  pred.labels = c("Intercept", "Maternal Em. Dysreg", "Child Reactivity", "Interaction"),
+  dv.labels = c("Internalizing Behavior (CBCL)"),
+  string.pred = "Coefficient",
+  string.ci = "CI (95%)",
+  string.p = "P-Value"
+  )
+
 
 linear_model2 <- lm(cbcl_score ~ ders_c * reactivity_c, 
                     data = subset(tidy_data, cbcl_subtype == "ext"))
-summary(linear_model2)
+#summary(linear_model2)
 
+tab_model(
+  linear_model2,
+  pred.labels = c("Intercept", "Maternal Em. Dysreg", "Child Reactivity", "Interaction"),
+  dv.labels = c("Externalizing Behavior (CBCL)"),
+  string.pred = "Coefficient",
+  string.ci = "CI (95%)",
+  string.p = "P-Value"
+  )
 ```
 
 ```{r plots}
