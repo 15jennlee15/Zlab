@@ -57,7 +57,7 @@ classoption       : "man"
 output            : papaja::apa6_pdf
 ---
 
-```{r loading packages/data import}
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
 library("papaja")
 
 #You will need to install kableExtra package in order for this to run
@@ -70,6 +70,10 @@ library(here)
 library(kableExtra)
 library(jtools)
 
+knitr::opts_chunk$set()
+```
+
+```{r tidy data,  include=FALSE}
 #import data and clean names
 data <- import(here("data", "R Project Data copy.xlsx")) %>%
   janitor::clean_names()
@@ -77,9 +81,7 @@ data <- import(here("data", "R Project Data copy.xlsx")) %>%
 #view data
 glimpse(data)
 
-```
 
-```{r tidy data}
 #tidy data using required functions
 tidy_data <- data %>%
   filter(!is.na(family_id)) %>%
