@@ -1,0 +1,71 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:descriptives ders and reactivity}Means and SDs for Maternal Emotion Dysregulation (DERS) and Child Reactivity}
+\begin{tabular}{llll}
+\toprule
+DERS\_mean & \multicolumn{1}{c}{DERS\_SD} & \multicolumn{1}{c}{Reactivity\_mean} & \multicolumn{1}{c}{Reactivity\_SD}\\
+\midrule
+70.10 & 22.33 & -1.10 & 0.65\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:descriptives cbcl}Means and SDs for Child Internalizing and Externalizing Behavior}
+\begin{tabular}{lll}
+\toprule
+cbcl\_subtype & \multicolumn{1}{c}{cbcl\_mean} & \multicolumn{1}{c}{cbcl\_SD}\\
+\midrule
+ext & 16.28 & 9.49\\
+int & 11.17 & 7.54\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:linear regression internalizing}Results of Linear Regression Predicting Child Internalizing Behavior}
+\begin{tabular}{lllll}
+\toprule
+Predictor & \multicolumn{1}{c}{$b$} & \multicolumn{1}{c}{95\% CI} & \multicolumn{1}{c}{$t(45)$} & \multicolumn{1}{c}{$p$}\\
+\midrule
+Intercept & 11.00 & $[9.04$, $12.97]$ & 11.27 & < .001\\
+Ders c & 0.17 & $[0.08$, $0.25]$ & 3.98 & < .001\\
+Reactivity c & -1.19 & $[-4.30$, $1.91]$ & -0.77 & .443\\
+Ders c $\times$ Reactivity c & -0.18 & $[-0.34$, $-0.02]$ & -2.27 & .028\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:linear regression externalizing}Results of Linear Regression Predicting Child Externalizing Behavior}
+\begin{tabular}{lllll}
+\toprule
+Predictor & \multicolumn{1}{c}{$b$} & \multicolumn{1}{c}{95\% CI} & \multicolumn{1}{c}{$t(45)$} & \multicolumn{1}{c}{$p$}\\
+\midrule
+Intercept & 16.02 & $[13.34$, $18.69]$ & 12.06 & < .001\\
+Ders c & 0.16 & $[0.05$, $0.27]$ & 2.84 & .007\\
+Reactivity c & 1.72 & $[-2.50$, $5.94]$ & 0.82 & .415\\
+Ders c $\times$ Reactivity c & -0.03 & $[-0.25$, $0.19]$ & -0.30 & .764\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table*}

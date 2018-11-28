@@ -2,6 +2,23 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{DataPrepScript_apa_style_files/figure-latex/plots-1.pdf}
-\caption{}
+\includegraphics{DataPrepScript_apa_style_files/figure-latex/plot1-1.pdf}
+\caption{\label{fig:plot1}Maternal Emotion Dysregulation and Child
+Behaviors}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{DataPrepScript_apa_style_files/figure-latex/plot2-1.pdf}
+\caption{\label{fig:plot2}Maternal Emotion Dysregulation and Child HRV
+Reactivity}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{DataPrepScript_apa_style_files/figure-latex/plot3-1.pdf}
+\caption{\label{fig:plot3}Child Reactivity Predicting Child Behavior
+Problems at Three Different Levels of Maternal Emotion Dysregulation}
 \end{figure*}

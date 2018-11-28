@@ -23,21 +23,14 @@ authornote:
 
 
 abstract: |
-  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
+  Maternal emotion dysregulation, a transdiagnostic feature of psychopathology, may be a potential risk factor for the emergence of psychopathology in children. However, there is less known about child characteristics that might serve as protective factors against this risk. One such characteristic is heart rate variability (HRV) reactivity, where greater decreases in HRV from baseline to a stressor task indicate increased emotion regulation. This study examined whether increased child HRV reactivity served as a protective factor mitigating the transmission of psychopathology from emotionally dysregulated mothers to behavior problems in preschool age children.
   
-  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
+  Mother-preschooler dyads (N=66) were oversampled for maternal emotion dysregulation, measured using maternal self-report on the Difficulties in Emotion Regulation Scale. Mothers reported on child internalizing and externalizing behaviors using the Child Behavioral Checklist. Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task.
   
-  One sentence clearly stating the **general problem** being addressed by  this particular study.
+  Two hierarchical regression models were conducted, entering maternal emotion dysregulation, child HRV reactivity, and the interaction term of these variables predicting either child internalizing or child externalizing problems (see Table 1). Across these two models, maternal emotion dysregulation, but not child HRV reactivity, significantly predicted child’s internalizing and externalizing behaviors. Maternal emotion dysregulation significantly interacted with child HRV reactivity to predict child internalizing behaviors, such that maternal emotion dysregulation had a greater impact on child internalizing behaviors if the child exhibited a greater decrease in HRV from baseline to the stressor task (i.e. exhibited increased self-regulation). There was no significant interaction predicting child externalizing behaviors. 
   
-  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
-  
-  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
-  
-  One or two sentences to put the results into a more **general context**.
-  
-  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
-  
-  <!-- https://tinyurl.com/ybremelq -->
+  These findings suggest that maternal emotion dysregulation more strongly predicts child behavior problems in physiologically regulated children. Interventions that target maternal emotion dysregulation may therefore improve child behavior outcomes even in physiologically regulated children.
+
   
 keywords          : "emotion regulation, parenting, child outcomes"
 wordcount         : "X"
@@ -117,18 +110,29 @@ tidy_data <- tidy_data %>%
 
 #Introduction
 
+Maternal emotion dysregulation, a transdiagnostic feature of psychopathology, may be a potential risk factor for the emergence of psychopathology in children. However, there is less known about child characteristics that might serve as protective factors against this risk. One such characteristic is heart rate variability (HRV) reactivity, where greater decreases in HRV from baseline to a stressor task indicate increased emotion regulation. This study examined whether increased child HRV reactivity served as a protective factor mitigating the transmission of psychopathology from emotionally dysregulated mothers to behavior problems in preschool age children.   
+
 # Methods
 
 ## Participants
-
-## Material
+Sixty-eight mothers and their preschool aged children (M = 48, SD = 7.6 months, 46% girls) were recruited from various sources including a developmental database maintained by the university psychology department, craigslist, and community mental health centers. Mothers were recruited based on the presence or absence of borderline personality disorder (BPD) symptoms, a disorder marked by extreme emotion dysregulation, as measured by the McLean screener (Zanarini et al., 2003). Mothers with elevated BPD symptoms were oversampled in order to ensure a range of emotion regulatory capabilities. 
 
 ## Procedure
+Families participated in a 2.5-hour assessment in offices on a university campus. Prior to participation, both mother consent and child assent were obtained, per Institutional Review Board approval. While mothers completed questionnaires, children completed assessments in an adjacent room, although child assessment data is not presented here. Mother and children were then reunited for parent-child interaction tasks in which baseline and stressor task HRV was collected on both mothers and children. Only child HRV data is presented here. 
+
+## Materials
+**Maternal  emotion  dysregulation.** Maternal emotion dysregulation was measured using the Difficulties in Emotion Regulation Scale  (DERS; Gratz & Roemer, 2004). The DERS is a 36-item self-report questionnaire designed to assess multiple facets of emotional dysregulation, with scores ranging from 36-180. Higher scores suggest greater emotion dysregulation. 
+
+**Heart rate variability.** Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task.
+
+**Child behavior problems.** Child behavior problems were assessed using maternal report on the Child Behavior Checklist (CBCL) for both internalizing (i.e., anxious, depressive, and overcontrolled) and externalizing (i.e., aggressive, hyperactive, noncompliant, and undercontrolled) behaviors.
 
 ## Data analysis
 We used `r cite_r("r-references.bib")` for all our analyses.
 
 # Results
+
+Two hierarchical regression models were conducted, entering maternal emotion dysregulation, child HRV reactivity, and the interaction term of these variables predicting either child internalizing or child externalizing problems (see Table 1). Across these two models, maternal emotion dysregulation, but not child HRV reactivity, significantly predicted child’s internalizing and externalizing behaviors. Maternal emotion dysregulation significantly interacted with child HRV reactivity to predict child internalizing behaviors, such that maternal emotion dysregulation had a greater impact on child internalizing behaviors if the child exhibited a greater decrease in HRV from baseline to the stressor task (i.e. exhibited increased self-regulation). There was no significant interaction predicting child externalizing behaviors. 
 
 ```{r descriptives ders and reactivity, results='asis'}
 #str(tidy_data)
@@ -249,7 +253,7 @@ interaction_plot
 
 
 # Discussion
-
+These findings suggest that maternal emotion dysregulation more strongly predicts child behavior problems in physiologically regulated children. Interventions that target maternal emotion dysregulation may therefore improve child behavior outcomes even in physiologically regulated children. 
 
 \newpage
 
