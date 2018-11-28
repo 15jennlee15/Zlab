@@ -57,11 +57,9 @@ classoption       : "man"
 output            : papaja::apa6_pdf
 ---
 
-```{r setup, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
+```{r setup,  include=FALSE}
 #You will need to install kableExtra package in order for this to run
 #You will need to install jtools package in order for this to run
-#You will need to install sjPlot package in order for this to run
-
 #Load Packages
 library("papaja")
 library(tidyverse)
@@ -70,17 +68,17 @@ library(here)
 library(kableExtra)
 library(jtools)
 library(knitr)
-library(sjPlot)
+
 knitr::opts_chunk$set()
 ```
 
-```{r tidy data,  include=FALSE}
+```{r tidy data}
 #import data and clean names
 data <- import(here("data", "R Project Data copy.xlsx")) %>%
   janitor::clean_names()
 
 #view data
-glimpse(data)
+#glimpse(data)
 
 
 #tidy data using required functions
@@ -101,7 +99,7 @@ tidy_data <- data %>%
   select(-discard) 
 
 #view tidy data
-glimpse(tidy_data)
+#glimpse(tidy_data)
 
 #Center DERS and Reactivity variables
 center_scale <- function(x) {
@@ -114,13 +112,12 @@ tidy_data <- tidy_data %>%
          ders_c = center_scale(ders), 
          reactivity_c = center_scale(reactivity))
 
-glimpse(tidy_data)
+#glimpse(tidy_data)
 ```
 
 #Introduction
 
 # Methods
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
 
 ## Participants
 
@@ -133,85 +130,116 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 # Results
 
-```{r descriptives}
-str(tidy_data)
+```{r descriptives ders and reactivity, results='asis'}
+#str(tidy_data)
 
-#Descriptives Table
-table <- tidy_data %>%
+#Descriptives Table DERS and Reactivity
+table_ders_reactivity <- tidy_data %>% 
   summarize(DERS_mean = mean(ders, na.rm = TRUE), 
             DERS_SD = sd(ders, na.rm = TRUE), 
             Reactivity_mean = mean(reactivity, na.rm = TRUE), 
             Reactivity_SD = sd(reactivity, na.rm = TRUE))
 
-kable(table, 
-      format = "latex",
-      booktabs = TRUE,
-      caption = "Means and SDs of maternal emotion dysregulation (DERS) and child reactivity")
+table_ders_reactivity[, -1] <-printnum(table_ders_reactivity[, -1])
 
-#Additional Table
-table2 <- tidy_data %>%
-  group_by(cbcl_subtype) %>%
-  summarize(cbcl_mean= mean(cbcl_score, na.rm = TRUE), 
-            cbcl_SD = sd(cbcl_score, na.rm = TRUE))
-  
+apa_table(table_ders_reactivity,
+          caption = "Means and SDs for Maternal Emotion Dysregulation (DERS) and Child Reactivity")
 
-kable(table2, 
-      format = "latex",
-      booktabs = TRUE,
-      caption = "Means and SDs of child internalizing and externalizing behavior")
+#kable(table, 
+#      format = "latex",
+#      booktabs = TRUE,
+#      caption = "Means and SDs of maternal emotion dysregulation (DERS) and child reactivity")
 
 ```
 
-```{r inference statistics}
+```{r descriptives cbcl, results='asis'}
+#Descriptives Table Internalizing and Externalizing Behavior
+table_cbcl <- tidy_data %>%
+  group_by(cbcl_subtype) %>%
+  summarize(cbcl_mean= round(mean(cbcl_score, na.rm = TRUE), 2), 
+            cbcl_SD = sd(cbcl_score, na.rm = TRUE))
+
+table_cbcl[, -1] <-printnum(table_cbcl[, -1])
+
+apa_table(table_cbcl,
+          caption = "Means and SDs for Child Internalizing and Externalizing Behavior")
+
+
+#kable(table2, 
+ #     format = "latex",
+  #    booktabs = TRUE,
+  #    caption = "Means and SDs of child internalizing and externalizing behavior")
+
+```
+
+```{r linear regression internalizing, echo=FALSE, results='asis'}
 linear_model1 <- lm(cbcl_score ~ ders_c * reactivity_c, 
                     data = subset(tidy_data, cbcl_subtype == "int"))
 #summary(linear_model1)
 
-tab_model(
-  linear_model1,
-  pred.labels = c("Intercept", "Maternal Em. Dysreg", "Child Reactivity", "Interaction"),
-  dv.labels = c("Internalizing Behavior (CBCL)"),
-  string.pred = "Coefficient",
-  string.ci = "CI (95%)",
-  string.p = "P-Value"
-  )
+linear_model1_print <- apa_print(linear_model1)
 
+apa_table(linear_model1_print$table,
+          caption = "Results of Linear Regression Predicting Child Internalizing Behavior")
 
-linear_model2 <- lm(cbcl_score ~ ders_c * reactivity_c, 
-                    data = subset(tidy_data, cbcl_subtype == "ext"))
-#summary(linear_model2)
-
-tab_model(
-  linear_model2,
-  pred.labels = c("Intercept", "Maternal Em. Dysreg", "Child Reactivity", "Interaction"),
-  dv.labels = c("Externalizing Behavior (CBCL)"),
-  string.pred = "Coefficient",
-  string.ci = "CI (95%)",
-  string.p = "P-Value"
-  )
+#Tried this code from sjPlot package, but it will not knit to pdf
+#tab_model(
+# linear_model1,
+#  pred.labels = c("Intercept", "Maternal Em. Dysreg", "Child Reactivity", "Interaction"),
+#  dv.labels = c("Internalizing Behavior (CBCL)"),
+#  string.pred = "Coefficient",
+#  string.ci = "CI (95%)",
+#  string.p = "P-Value"
+#  )
 ```
 
-```{r plots}
+```{r linear regression externalizing, echo=FALSE, results='asis'}
+linear_model2 <- lm(cbcl_score ~ ders_c * reactivity_c, 
+                    data = subset(tidy_data, cbcl_subtype == "ext"))
+
+linear_model2_print <- apa_print(linear_model2)
+
+apa_table(linear_model2_print$table,
+          caption = "Results of Linear Regression Predicting Child Externalizing Behavior")
+
+#summary(linear_model2)
+
+#stargazer(linear_model2, type = "text", title = "Linear Model 2", digits = 2)
+
+#library(sjPlot)
+#tab_model(
+#  linear_model2,
+#  pred.labels = c("Intercept", "Maternal Em. Dysreg", "Child Reactivity", "Interaction"),
+#  dv.labels = c("Externalizing Behavior (CBCL)"),
+#  string.pred = "Coefficient",
+#  string.ci = "CI (95%)",
+#  string.p = "P-Value"
+#  )
+```
+
+
+```{r plot1, fig.cap="Maternal Emotion Dysregulation and Child Behaviors"}
 #A scatterplot of maternal emotion dysregulation (x-axis)
 #and child behaviors (y-axis), including a regression line 
 ggplot(tidy_data, aes(x=ders, y=cbcl_score, color = cbcl_subtype)) +
   geom_point(color="black") +
   geom_smooth(method = "lm") +
-   labs(title= "Figure 1. Maternal Emotion Dysregulation and Child Behaviors", 
-        x="Maternal Emotion Dysregulation (DERS)",
+   labs(x="Maternal Emotion Dysregulation (DERS)",
        y="Child Problem Behaviors")
+```
 
+```{r plot2, fig.cap="Maternal Emotion Dysregulation and Child HRV Reactivity"}
 #A scatterplot of maternal emotion dysregulation (x-axis)
 #and reactivity (y-axis), including a regression line 
 ggplot(tidy_data, aes(x=ders, y=reactivity)) +
   geom_point(color="black") +
   geom_smooth(method = "lm") +
-   labs(title= "Figure 2. Maternal Emotion Dysregulation and Child HRV Reactivity",
-        x="Maternal Emotion Dysregulation (DERS)",
+   labs(x="Maternal Emotion Dysregulation (DERS)",
        y="Child Reactivity HRV")
+```
 
+```{r plot3, fig.cap= "Child Reactivity Predicting Child Behavior Problems at Three Different Levels of Maternal Emotion Dysregulation "}
 interaction_plot <- interact_plot(linear_model1, pred = "reactivity_c", modx = "ders_c", centered = "none", 
-      main.title= "Figure 3. Interaction of Child Reactivity and Maternal Emotion Dysregulation Predicting Child Behavior Problems",
       x.label="Child Reactivity HRV",
       y.label="Child Behavior Problems (CBCL)",
       legend.main = "DERS")
