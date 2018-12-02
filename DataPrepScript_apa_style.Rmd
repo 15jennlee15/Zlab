@@ -126,18 +126,20 @@ tidy_data <- tidy_data %>%
 Families participated in a 2.5-hour assessment in offices on a university campus. Prior to participation, both mother consent and child assent were obtained, per Institutional Review Board approval. While mothers completed questionnaires, children completed assessments in an adjacent room, although child assessment data is not presented here. Mother and children were then reunited for parent-child interaction tasks in which baseline and stressor task HRV was collected on both mothers and children. Only child HRV data is presented here. 
 
 ## Materials
-**Maternal  emotion  dysregulation.** Maternal emotion dysregulation was measured using the Difficulties in Emotion Regulation Scale  (DERS; Gratz & Roemer, 2004). The DERS is a 36-item self-report questionnaire designed to assess multiple facets of emotional dysregulation, with scores ranging from 36-180. Higher scores suggest greater emotion dysregulation. 
+**Maternal  emotion  dysregulation.** Maternal emotion dysregulation was measured using the Difficulties in Emotion Regulation Scale  (DERS; Gratz & Roemer, 2004). The DERS is a 36-item self-report questionnaire designed to assess multiple facets of emotional dysregulation, with scores ranging from 36-180 (*M*=`r mean(tidy_data$ders)`, *SD*=`r sd(tidy_data$ders)`). Higher scores suggest greater emotion dysregulation. 
 
-**Heart rate variability.** Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task.
+**Heart rate variability.** Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task (*M*=`r mean(tidy_data$reactivity)`, *SD*=`r sd(tidy_data$reactivity)`)..
 
-**Child behavior problems.** Child behavior problems were assessed using maternal report on the Child Behavior Checklist (CBCL) for both internalizing (i.e., anxious, depressive, and overcontrolled) and externalizing (i.e., aggressive, hyperactive, noncompliant, and undercontrolled) behaviors.
+**Child behavior problems.** Child behavior problems were assessed using maternal report on the Child Behavior Checklist (CBCL) for both internalizing (i.e., anxious, depressive, and overcontrolled) and externalizing (i.e., aggressive, hyperactive, noncompliant, and undercontrolled) behaviors. Mean scores are presented in Table 2.
 
 ## Data analysis
 We used `r cite_r("r-references.bib")` for all our analyses.
 
 # Results
 
-Two hierarchical regression models were conducted, entering maternal emotion dysregulation, child HRV reactivity, and the interaction term of these variables predicting either child internalizing or child externalizing problems (see Table 1). Across these two models, maternal emotion dysregulation, but not child HRV reactivity, significantly predicted child’s internalizing and externalizing behaviors. Maternal emotion dysregulation significantly interacted with child HRV reactivity to predict child internalizing behaviors, such that maternal emotion dysregulation had a greater impact on child internalizing behaviors if the child exhibited a greater decrease in HRV from baseline to the stressor task (i.e. exhibited increased self-regulation). There was no significant interaction predicting child externalizing behaviors. 
+Means and standard deviations for variables are presented in Table 1. and Table 2.
+
+Two hierarchical regression models were conducted, entering maternal emotion dysregulation, child HRV reactivity, and the interaction term of these variables predicting either child internalizing or child externalizing problems (see Table 2.). Across these two models, maternal emotion dysregulation, but not child HRV reactivity, significantly predicted child’s internalizing and externalizing behaviors. Maternal emotion dysregulation significantly interacted with child HRV reactivity to predict child internalizing behaviors, such that maternal emotion dysregulation had a greater impact on child internalizing behaviors if the child exhibited a greater decrease in HRV from baseline to the stressor task (i.e. exhibited increased self-regulation). There was no significant interaction predicting child externalizing behaviors. 
 
 ```{r descriptives ders and reactivity, results='asis'}
 #str(tidy_data)
