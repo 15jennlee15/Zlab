@@ -229,7 +229,7 @@ apa_table(linear_model2_print$table,
 ```
 
 
-```{r plot1, fig.cap="Maternal Emotion Dysregulation and Child Behaviors"}
+```{r plot1, fig.cap="Maternal Emotion Dysregulation and Child Behaviors", warning=FALSE}
 #A scatterplot of maternal emotion dysregulation (x-axis)
 #and child behaviors (y-axis), including a regression line 
 ggplot(tidy_data, aes(x=ders, y=cbcl_score, color = cbcl_subtype)) +
@@ -239,7 +239,7 @@ ggplot(tidy_data, aes(x=ders, y=cbcl_score, color = cbcl_subtype)) +
        y="Child Problem Behaviors")
 ```
 
-```{r plot2, fig.cap="Maternal Emotion Dysregulation and Child HRV Reactivity"}
+```{r plot2, fig.cap="Maternal Emotion Dysregulation and Child HRV Reactivity", warning=FALSE}
 #A scatterplot of maternal emotion dysregulation (x-axis)
 #and reactivity (y-axis), including a regression line 
 ggplot(tidy_data, aes(x=ders, y=reactivity)) +
