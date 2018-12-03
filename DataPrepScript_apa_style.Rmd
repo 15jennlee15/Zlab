@@ -128,7 +128,7 @@ Families participated in a 2.5-hour assessment in offices on a university campus
 ## Materials
 **Maternal  emotion  dysregulation.** Maternal emotion dysregulation was measured using the Difficulties in Emotion Regulation Scale  (DERS; Gratz & Roemer, 2004). The DERS is a 36-item self-report questionnaire designed to assess multiple facets of emotional dysregulation, with scores ranging from 36-180 (*M*=`r mean(tidy_data$ders)`, *SD*=`r sd(tidy_data$ders)`). Higher scores suggest greater emotion dysregulation. 
 
-**Heart rate variability.** Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task (*M*=`r mean(tidy_data$reactivity)`, *SD*=`r sd(tidy_data$reactivity)`)..
+**Heart rate variability.** Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task (*M*=`r mean(tidy_data$reactivity, na.rm = TRUE)`, *SD*=`r sd(tidy_data$reactivity, na.rm = TRUE)`)..
 
 **Child behavior problems.** Child behavior problems were assessed using maternal report on the Child Behavior Checklist (CBCL) for both internalizing (i.e., anxious, depressive, and overcontrolled) and externalizing (i.e., aggressive, hyperactive, noncompliant, and undercontrolled) behaviors. Mean scores are presented in Table 2.
 
