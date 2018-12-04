@@ -137,11 +137,6 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 We used linear regressions to test the predictive effects of maternal emotion dysregulation and child reactivity on child behaviors.
 
-# Results
-
-Means and standard deviations for variables are presented in Table 1. and Table 2.
-
-Two hierarchical regression models were conducted, entering maternal emotion dysregulation, child HRV reactivity, and the interaction term of these variables predicting either child internalizing or child externalizing problems (see Table 2.). Across these two models, maternal emotion dysregulation, but not child HRV reactivity, significantly predicted child’s internalizing and externalizing behaviors. Maternal emotion dysregulation significantly interacted with child HRV reactivity to predict child internalizing behaviors, such that maternal emotion dysregulation had a greater impact on child internalizing behaviors if the child exhibited a greater decrease in HRV from baseline to the stressor task (i.e. exhibited increased self-regulation). There was no significant interaction predicting child externalizing behaviors. 
 
 ```{r descriptives ders and reactivity, results='asis'}
 #str(tidy_data)
@@ -186,14 +181,24 @@ apa_table(table_cbcl,
 ```
 
 ```{r linear regression internalizing, echo=FALSE, results='asis'}
+
+#running linear model predicting child internalizing by maternal emotion dysregulation*child reactivity
 linear_model1 <- lm(cbcl_score ~ ders_c * reactivity_c, 
                     data = subset(tidy_data, cbcl_subtype == "int"))
-#summary(linear_model1)
 
 linear_model1_print <- apa_print(linear_model1)
 
 apa_table(linear_model1_print$table,
           caption = "Results of Linear Regression Predicting Child Internalizing Behavior")
+
+#saving coefficients, tvalues and pvalues for purposes of in line coding of results
+lm1_ders_beta <- .17
+lm1_ders_tvalue <- 3.99
+lm1_ders_pvalue <- .001
+
+lm1_int_beta <- -.18
+lm1_int_tvalue <- -2.27
+lm1_int_pvalue <- .03
 
 #Tried this code from sjPlot package, but it will not knit to pdf
 #tab_model(
@@ -207,6 +212,7 @@ apa_table(linear_model1_print$table,
 ```
 
 ```{r linear regression externalizing, echo=FALSE, results='asis'}
+#running linear model predicting child externalizing by maternal emotion dysregulation*child reactivity
 linear_model2 <- lm(cbcl_score ~ ders_c * reactivity_c, 
                     data = subset(tidy_data, cbcl_subtype == "ext"))
 
@@ -215,7 +221,14 @@ linear_model2_print <- apa_print(linear_model2)
 apa_table(linear_model2_print$table,
           caption = "Results of Linear Regression Predicting Child Externalizing Behavior")
 
-#summary(linear_model2)
+#saving coefficients, tvalues and pvalues for purposes of in line coding of results
+lm2_ders_beta <- .16
+lm2_ders_tvalue <- 2.84
+lm2_ders_pvalue <- .01
+
+lm2_int_beta <- -.03
+lm2_int_tvalue <- -.30
+lm2_int_pvalue <- .76
 
 #stargazer(linear_model2, type = "text", title = "Linear Model 2", digits = 2)
 
@@ -259,6 +272,11 @@ interaction_plot <- interact_plot(linear_model1, pred = "reactivity_c", modx = "
 interaction_plot
 ```
 
+# Results
+
+Means and standard deviations for variables are presented in Table 1 and Table 2.
+
+Two hierarchical regression models were conducted, entering maternal emotion dysregulation, child HRV reactivity, and the interaction term of these variables predicting either child internalizing or child externalizing problems (see Table 2.). Across these two models, maternal emotion dysregulation, but not child HRV reactivity, significantly predicted child’s internalizing ($\beta$ =`r lm1_ders_beta`, t(45)=`r lm1_ders_tvalue`, p<`r lm1_ders_pvalue`) and externalizing behaviors ($\beta$ =`r lm2_ders_beta`, t(45)=`r lm2_ders_tvalue`, p<`r lm2_ders_pvalue`). Maternal emotion dysregulation significantly interacted with child HRV reactivity to predict child internalizing behaviors, such that maternal emotion dysregulation had a greater impact on child internalizing behaviors if the child exhibited a greater decrease in HRV from baseline to the stressor task (i.e. exhibited increased self-regulation), ($\beta$ =`r lm1_int_beta`, t(45)=`r lm1_int_tvalue`, p<`r lm1_int_pvalue`). There was no significant interaction predicting child externalizing behaviors ($\beta$ =`r lm2_int_beta`, t(45)=`r lm2_int_tvalue`, p<`r lm2_int_pvalue`).
 
 
 # Discussion
