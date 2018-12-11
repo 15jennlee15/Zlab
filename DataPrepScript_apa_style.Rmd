@@ -21,11 +21,14 @@ authornote:
   
 
 
+# I would generally not refer to tables in the abstract. Specific journals will
+# have their own requirements but this is quite a bit longer than is
+# conventional by APA standards.
 
 abstract: |
   Maternal emotion dysregulation, a transdiagnostic feature of psychopathology, may be a potential risk factor for the emergence of psychopathology in children. However, there is less known about child characteristics that might serve as protective factors against this risk. One such characteristic is heart rate variability (HRV) reactivity, where greater decreases in HRV from baseline to a stressor task indicate increased emotion regulation. This study examined whether increased child HRV reactivity served as a protective factor mitigating the transmission of psychopathology from emotionally dysregulated mothers to behavior problems in preschool age children.
   
-  Mother-preschooler dyads (N=66) were oversampled for maternal emotion dysregulation, measured using maternal self-report on the Difficulties in Emotion Regulation Scale. Mothers reported on child internalizing and externalizing behaviors using the Child Behavioral Checklist. Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task.
+  Mother-preschooler dyads ($N=66$) were oversampled for maternal emotion dysregulation, measured using maternal self-report on the Difficulties in Emotion Regulation Scale. Mothers reported on child internalizing and externalizing behaviors using the Child Behavioral Checklist. Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task.
   
   Two hierarchical regression models were conducted, entering maternal emotion dysregulation, child HRV reactivity, and the interaction term of these variables predicting either child internalizing or child externalizing problems (see Table 1). Across these two models, maternal emotion dysregulation, but not child HRV reactivity, significantly predicted child’s internalizing and externalizing behaviors. Maternal emotion dysregulation significantly interacted with child HRV reactivity to predict child internalizing behaviors, such that maternal emotion dysregulation had a greater impact on child internalizing behaviors if the child exhibited a greater decrease in HRV from baseline to the stressor task (i.e. exhibited increased self-regulation). There was no significant interaction predicting child externalizing behaviors. 
   
@@ -67,8 +70,17 @@ knitr::opts_chunk$set()
 
 ```{r tidy data}
 #import data and clean names
-data <- import(here("data", "R Project Data copy.xlsx")) %>%
+data <- import(here("data", "R Project Data copy.xlsx"),
+               setclass = "tbl_df") %>%
   janitor::clean_names()
+
+# I would generally not name your data object "data", becuase there is a
+# function in R already called data, which is used to extract data from within
+# packages
+
+# I also generally recommend working with tibbles because it makes interactive
+# work easier (imo), so I've set the class on import to tibble so for myself
+# as I'm walking through your code.
 
 #view data
 #glimpse(data)
@@ -82,6 +94,14 @@ tidy_data <- data %>%
   spread(type, val) %>%
   select(-text)
 
+# So I like that you've demonstrated gather, separate, and spread here, but you
+# actually didn't change the format at all. The structure of your data is
+# exactly the same as it was before, and you essentially just took a very
+# complicated way to rename two variables from `cbcl_int` and `cbcl_ext` to
+# `int` and `ext`.
+
+# And now in the below it looks like you've sort of abandoned the above and
+# redone it, but this time you're not spreading.
 tidy_data <- data %>%
   filter(!is.na(family_id)) %>%
   gather(key = var, value = cbcl_score, starts_with("cbcl")) %>% 
@@ -108,35 +128,61 @@ tidy_data <- tidy_data %>%
 #glimpse(tidy_data)
 ```
 
-#Introduction
+# Introduction
 
-Emotion dysregulation, a transdiagnostic feature of psychopathology, has been shown to be a significant mediator of mental health symptoms and symptom severity in adults [@kring2009emotion]. A parent's own mental health has been known to predict child mental health symptoms and behavioral problems [@mclaughlin2012parent].  These two facts together, therefore, may mean a parent's emotion regulation, particularly emotion regulation difficulties, may be an important risk factor for the emergence of psychopathology in children. Investigating the role of parental emotion regulation on childhood health and mental health problems is therefore an important clinical question in need of further investigation.
+Emotion dysregulation, a transdiagnostic feature of psychopathology, has been shown to be a significant mediator of mental health symptoms and symptom severity in adults [@kring2009emotion]. A parent's own mental health has also been shown to predict child mental health symptoms and behavioral problems [@mclaughlin2012parent].  Together, these findings imply that a parent's emotion regulation, particularly emotion regulation difficulties, may be an important risk factor for the emergence of psychopathology in children. Investigating the role of parental emotion regulation on childhood health and mental health problems is therefore an important clinical question in need of further investigation.
+
+<!-- Maybe a bit nitpicky but I would not use the word "facts" like this.
+There's evidence to support that these things are true, but they are not facts. I went ahead and made a suggested change.
+-->
 
 While risk factors are one important area to investigate in the prevention of child mental health symptoms, it is also important to examine protective factors that may help make a child more resilient to developing these symptoms later on. However, there is less known about child characteristics that might serve as protective factors against risk. One such characteristic that has been identified in the literature is heart rate variability (HRV) reactivity, where greater decreases in HRV from baseline to a stressor task indicate increased emotion regulation [@appelhans2006heart]. 
   
-This study examined whether increased child HRV reactivity served as a protective factor mitigating the transmission of psychopathology from emotionally dysregulated mothers to behavior problems in preschool age children. The aims of this research is to investigate the relationship between maternal emotion dysregulation and child behaviors in a sample of women with BPD symptoms and there preschool aged children.  A second aim is to examine the effects of maternal emotion dysregulation on child HRV reactivity. The final aim is to examine the interaction of maternal emotion dysregulation and child reactivity on child behaviors.
-  
+This study examined whether increased child HRV reactivity served as a protective factor mitigating the transmission of psychopathology from emotionally dysregulated mothers to behavior problems in preschool age children. The aims of this research is to investigate the relationship between maternal emotion dysregulation and child behaviors in a sample of women with BPD symptoms and their preschool aged children.  A second aim is to examine the effects of maternal emotion dysregulation on child HRV reactivity. The final aim is to examine the interaction of maternal emotion dysregulation and child reactivity on child behaviors.
+
+<!-- Not sure what BPD means... -->
+
+<!-- Also a relatively minor points, but above you talk about mediation, but 
+here you're talking about an interaction, which would imply moderation. Those 
+are slightly different concepts, and you can't get at mediation through an 
+interaction (but moderation and interaction are the same thing). -->
+
 # Methods
 
 ## Participants
 
-Sixty-eight mothers and their preschool aged children (M = 48, SD = 7.6 months, 46% girls) were recruited from various sources including a developmental database maintained by the university psychology department, craigslist, and community mental health centers. Mothers were recruited based on the presence or absence of borderline personality disorder (BPD) symptoms, a disorder marked by extreme emotion dysregulation, as measured by the McLean screener (Zanarini et al., 2003). Mothers with elevated BPD symptoms were oversampled in order to ensure a range of emotion regulatory capabilities. 
+<!-- The stats below would have been a good spot to use inline code.  -->
+
+Sixty-eight mothers and their preschool aged children ($M = 48, SD = 7.6$ months, 46% girls) were recruited from various sources including a developmental database maintained by the university psychology department, craigslist, and community mental health centers. Mothers were recruited based on the presence or absence of borderline personality disorder (BPD) symptoms, a disorder marked by extreme emotion dysregulation, as measured by the McLean screener (Zanarini et al., 2003). Mothers with elevated BPD symptoms were oversampled in order to ensure a range of emotion regulatory capabilities. 
+
+<!-- Now I see the BPD acronym, but should have been spelled out first time. -->
 
 ## Procedure
 Families participated in a 2.5-hour assessment in offices on a university campus. Prior to participation, both mother consent and child assent were obtained, per Institutional Review Board approval. While mothers completed questionnaires, children completed assessments in an adjacent room, although child assessment data is not presented here. Mother and children were then reunited for parent-child interaction tasks in which baseline and stressor task HRV was collected on both mothers and children. Only child HRV data is presented here. 
 
 ## Materials
-**Maternal  emotion  dysregulation.** Maternal emotion dysregulation was measured using the Difficulties in Emotion Regulation Scale  (DERS). The DERS is a 36-item self-report questionnaire designed to assess multiple facets of emotional dysregulation, with scores ranging from 36-180 (*M*=`r mean(tidy_data$ders)`, *SD*=`r sd(tidy_data$ders)`). Higher scores suggest greater emotion dysregulation. 
 
-**Heart rate variability.** Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task (*M*=`r mean(tidy_data$reactivity, na.rm = TRUE)`, *SD*=`r sd(tidy_data$reactivity, na.rm = TRUE)`)..
+<!-- These should have just been level 3 headers. I've changed them 
+accordingly. -->
 
-**Child behavior problems.** Child behavior problems were assessed using maternal report on the Child Behavior Checklist (CBCL) for both internalizing (i.e., anxious, depressive, and overcontrolled) and externalizing (i.e., aggressive, hyperactive, noncompliant, and undercontrolled) behaviors. Mean scores are presented in Table 2.
+### Maternal  emotion  dysregulation
+Maternal emotion dysregulation was measured using the Difficulties in Emotion Regulation Scale  (DERS). The DERS is a 36-item self-report questionnaire designed to assess multiple facets of emotional dysregulation, with scores ranging from 36-180 ($M=`r mean(tidy_data$ders)`, SD=`r sd(tidy_data$ders)`$). Higher scores suggest greater emotion dysregulation. 
+
+### Heart rate variability
+Child baseline HRV was collected, where the child sat quietly for 2 minutes while a book was read to them. Child HRV was also measured during a stressor task, where dyads had 7 minutes to build a complex Lego figure. HRV reactivity was calculated by subtracting child baseline HRV from child HRV during the stressor task ($M=`r mean(tidy_data$reactivity, na.rm = TRUE)`, SD=`r sd(tidy_data$reactivity, na.rm = TRUE)`$).
+
+### Child behavior problems
+Child behavior problems were assessed using maternal report on the Child Behavior Checklist (CBCL) for both internalizing (i.e., anxious, depressive, and overcontrolled) and externalizing (i.e., aggressive, hyperactive, noncompliant, and undercontrolled) behaviors. Mean scores are presented in Table 2.
+
+<!-- The above should be Table 1, because it's the first time in text that a 
+table has been referenced. -->
 
 ## Data analysis
 We used `r cite_r("r-references.bib")` for all our analyses.
 
 We used linear regressions to test the predictive effects of maternal emotion dysregulation and child reactivity on child behaviors.
 
+<!-- You should note here that you fit separate models by CBCL type -->
 
 ```{r descriptives ders and reactivity, results='asis'}
 #str(tidy_data)
@@ -148,10 +194,19 @@ table_ders_reactivity <- tidy_data %>%
             Reactivity_mean = mean(reactivity, na.rm = TRUE), 
             Reactivity_SD = sd(reactivity, na.rm = TRUE))
 
-table_ders_reactivity[, -1] <-printnum(table_ders_reactivity[, -1])
+table_ders_reactivity[, -1] <- printnum(table_ders_reactivity[, -1])
 
 apa_table(table_ders_reactivity,
           caption = "Means and SDs for Maternal Emotion Dysregulation (DERS) and Child Reactivity")
+
+# I actually think this table would have looked better by doing a follow-up
+# gather/separate/spread, as follows
+#
+# table_ders_reactivity %>%
+#   gather(var, val) %>%
+#   separate(var, c("var", "stat")) %>%
+#   spread(stat, val)
+
 
 #kable(table, 
 #      format = "latex",
@@ -167,11 +222,27 @@ table_cbcl <- tidy_data %>%
   summarize(cbcl_mean= round(mean(cbcl_score, na.rm = TRUE), 2), 
             cbcl_SD = sd(cbcl_score, na.rm = TRUE))
 
-table_cbcl[, -1] <-printnum(table_cbcl[, -1])
+table_cbcl[, -1] <- printnum(table_cbcl[, -1])
 
 apa_table(table_cbcl,
           caption = "Means and SDs for Child Internalizing and Externalizing Behavior")
 
+# I also think you could have had Table 1 and Table 2 be reported in the same
+# table. Below is one approach. Another would be to just bind your two tables
+# together using either `dplyr::bind_rows` (although you'd have to change the
+# variable names to match) or `base::rbind`
+#
+# data %>%
+#   mutate(dis_reactivity = child_lego - child_baseline) %>%
+#   rename(dis_ders = ders) %>%
+#   gather(var, val, cbcl_int, cbcl_ext, dis_reactivity, dis_ders) %>%
+#   separate(var, c("dis", "var")) %>%
+#   group_by(var) %>%
+#   summarize(mean = mean(val, na.rm = TRUE),
+#             sd   = sd(val, na.rm = TRUE)) %>%
+#   mutate(var = factor(var, 
+#                       levels = c("int", "ext", "ders", "reactivity"))) %>%
+#   arrange(var)
 
 #kable(table2, 
  #     format = "latex",
@@ -199,6 +270,21 @@ lm1_ders_pvalue <- .001
 lm1_int_beta <- -.18
 lm1_int_tvalue <- -2.27
 lm1_int_pvalue <- .03
+
+# hmm... is the above the most reproducible? If your model changes, you'd have
+# to update these all by hand. Below are some alternatives. I know we didn't
+# exactly talk about this, which makes it hard. Here's one alternative, which
+# I'll illustrate for ders.
+
+# Extract ders coefficient
+# lm1_tidy <- broom::tidy(linear_model1)
+
+# lm1_ders_beta <- lm1_tidy[lm1_tidy$term == "ders_c", "estimate"]
+# lm1_ders_tvalue <- lm1_tidy[lm1_tidy$term == "ders_c", "statistic"]
+# lm1_ders_pvalue <- lm1_tidy[lm1_tidy$term == "ders_c", "p"]
+
+# Another way, that you were almost there on, is to just use your 
+# linear_model1_print object. I'll illustrate that in text.
 
 #Tried this code from sjPlot package, but it will not knit to pdf
 #tab_model(
@@ -274,12 +360,23 @@ interaction_plot
 
 # Results
 
-Means and standard deviations for variables are presented in Table 1 and Table 2. Two hierarchical regression models were conducted, entering maternal emotion dysregulation, child HRV reactivity, and the interaction term of these variables predicting either child internalizing or child externalizing problems (see Tables 3 & 4.). Across these two models, maternal emotion dysregulation, but not child HRV reactivity, significantly predicted child’s internalizing ($\beta$ =`r lm1_ders_beta`, t(45)=`r lm1_ders_tvalue`, p<`r lm1_ders_pvalue`) and externalizing behaviors ($\beta$ =`r lm2_ders_beta`, t(45)=`r lm2_ders_tvalue`, p<`r lm2_ders_pvalue`). Figure 1 illustrates the relationship between maternal emotion dysregulation and child behavior. Maternal emotion dysregulation significantly interacted with child HRV reactivity to predict child internalizing behaviors, such that maternal emotion dysregulation had a greater impact on child internalizing behaviors if the child exhibited a greater decrease in HRV from baseline to the stressor task (i.e. exhibited increased self-regulation), ($\beta$ =`r lm1_int_beta`, t(45)=`r lm1_int_tvalue`, p<`r lm1_int_pvalue`) (see Figure 3). There was no significant interaction predicting child externalizing behaviors ($\beta$ =`r lm2_int_beta`, t(45)=`r lm2_int_tvalue`, p<`r lm2_int_pvalue`).
+<!-- Just a more general note, but I would not describe these as hierarchical
+regressions. There are two types of regression models that fit into that class,
+but these don't fit either of them, to me. I would just refer to the as linear
+regression models.  -->
 
+Means and standard deviations for variables are presented in Table 1 and Table 2. Two hierarchical regression models were conducted, entering maternal emotion dysregulation, child HRV reactivity, and the interaction term of these variables predicting either child internalizing or child externalizing problems (see Tables 3 & 4.). Across these two models, maternal emotion dysregulation, but not child HRV reactivity, significantly predicted child’s internalizing (`r linear_model1_print$full_result$ders_c`) and externalizing behaviors ($\beta =`r lm2_ders_beta`, t(45)=`r lm2_ders_tvalue`, p < `r lm2_ders_pvalue`$). Figure 1 illustrates the relationship between maternal emotion dysregulation and child behavior by cbcl subtype. Maternal emotion dysregulation significantly interacted with child HRV reactivity to predict child internalizing behaviors, such that maternal emotion dysregulation had a greater impact on child internalizing behaviors if the child exhibited a greater decrease in HRV from baseline to the stressor task (i.e. exhibited increased self-regulation), ($\beta =`r lm1_int_beta`, t(45)=`r lm1_int_tvalue`, p<`r lm1_int_pvalue`$). This interaction is displayed visually in Figure 3. There was not a significant interaction predicting child externalizing behaviors ($\beta =`r lm2_int_beta`, t(45)=`r lm2_int_tvalue`, p<`r lm2_int_pvalue`$).
+
+<!-- Above, I've shown an example of using the results from `apa_print` in 
+text -->
+
+<!-- For Fig 1, this make it look like you modeled subtype in the model. I 
+would suggest using faceting, which may help make it a little clearer that 
+they were separate models. -->
 
 # Discussion
 
-In this study we found that there was a maternal emotion dysregulation significantly predicted child behaviors (Aim 1), indicating that emotion dysregulation is a potential risk factor for the development of child mental health symptoms in the future.  We did not find a significant association between child reactivity and child behaviors however (Aim 2), indicating that high emotion regulation reactivity alone may not be enough to protect children from the development of future mental health problems or behavioral problems. Lastly, we found that maternal emotion dysregulation more strongly predicts child behavior problems in physiologically regulated children (Aim 3), meaning that maternal emotion dysregulation is such a strong predictor of risk it may override any potential protective impact of physiological regulation. This finding bears clinical impact in that it suggests that interventions that target maternal emotion dysregulation are critical, and may be able to improve child behavior outcomes even in physiologically regulated children. More research is needed on this important topic, particularly intervention studies that examine the effects of treatment for maternal emotion dysregulation on child outcomes.
+In this study we found that maternal emotion dysregulation significantly predicted child behaviors (Aim 1), indicating that emotion dysregulation is a potential risk factor for the development of child mental health symptoms in the future.  We did not find a significant association between child reactivity and child behaviors, however (Aim 2), indicating that high emotion regulation reactivity alone may not be enough to protect children from the development of future mental health problems or behavioral problems. Lastly, we found that maternal emotion dysregulation more strongly predicted child behavior problems in physiologically regulated children (Aim 3), suggesting that maternal emotion dysregulation may be such a strong predictor of risk that it overrides any potential protective impact of physiological regulation. This finding bears clinical impact in that it suggests that interventions targeting maternal emotion dysregulation are critical, and may be able to improve child behavior outcomes even in physiologically regulated children. More research is needed on this important topic, particularly intervention studies that examine the effects of treatment for maternal emotion dysregulation on child outcomes.
 
 \newpage
 
